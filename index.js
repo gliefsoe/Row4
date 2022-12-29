@@ -34,9 +34,9 @@ io.on('connection', (socket) => {
       console.log('user disconnected: ' + clientId + ' count: ' + connectionCount);
     });
     socket.on('chat message', (msg) => {
-        console.log('message: ' + msg);
+        console.log('message from: ' + clientId + ' : ' + msg);
         // emit to all connected sockets
-        io.emit('chat message', msg);
+        io.emit('chat message', '(' + clientId + ')' + msg);
       });
   });
 
