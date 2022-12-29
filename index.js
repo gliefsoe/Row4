@@ -36,7 +36,7 @@ io.on('connection', (socket) => {
     socket.on('chat message', (msg) => {
         console.log('message from: ' + clientId + ' : ' + msg);
         // emit to all connected sockets
-        io.emit('chat message', '(' + clientId + ')' + msg);
+        io.emit('chat message', '(' + clientId + ') : ' + msg);
       });
   });
 
