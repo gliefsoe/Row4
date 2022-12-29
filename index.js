@@ -6,6 +6,10 @@ const { Server } = require("socket.io");
 const io = new Server(server);
 
 const port = 8080;
+// store the connection Count
+var connectionCount = 0;
+// store the WebSocket objects for each client
+const clients = {};
 
 app.get('/', (req, res) => {
     // send plain HTML
@@ -15,9 +19,19 @@ app.get('/', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-    console.log('a user connected');
+    
+    // increment the connection count
+    connectionCount++;
+    // assign a unique identifier to the client
+    const clientId = req.headers['sec-websocket-key'];
+    // store the client's WebSocket object
+    clients[clientId] = socket;
+    console.log('a user connected' + clientId + ' count: ' + connectionCount);
+
     socket.on('disconnect', () => {
-      console.log('user disconnected');
+      
+      connectionCount--;
+      console.log('user disconnected' + ' count: ' + connectionCount);
     });
     socket.on('chat message', (msg) => {
         console.log('message: ' + msg);
