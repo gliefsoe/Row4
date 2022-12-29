@@ -26,12 +26,12 @@ io.on('connection', (socket) => {
     const clientId = socket.id
     // store the client's WebSocket object
     clients[clientId] = socket;
-    console.log('a user connected' + clientId + ' count: ' + connectionCount);
+    console.log('a user connected: ' + clientId + ' count: ' + connectionCount);
 
     socket.on('disconnect', () => {
       
       connectionCount--;
-      console.log('user disconnected' + ' count: ' + connectionCount);
+      console.log('user disconnected: ' + clientId + ' count: ' + connectionCount);
     });
     socket.on('chat message', (msg) => {
         console.log('message: ' + msg);
