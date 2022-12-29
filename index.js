@@ -23,7 +23,7 @@ io.on('connection', (socket) => {
     // increment the connection count
     connectionCount++;
     // assign a unique identifier to the client
-    const clientId = req.headers['sec-websocket-key'];
+    const clientId = socket.id
     // store the client's WebSocket object
     clients[clientId] = socket;
     console.log('a user connected' + clientId + ' count: ' + connectionCount);
