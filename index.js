@@ -38,6 +38,11 @@ io.on('connection', (socket) => {
         // emit to all connected sockets
         io.emit('chat message', '(' + clientId + ') : ' + msg);
       });
+    socket.on('401 message', (msg) => {
+        console.log('401 message from: ' + clientId + ' : ' + msg);
+        // emit to all connected sockets
+        io.emit('401 message', msg);
+      });
   });
 
 server.listen(port, () => {

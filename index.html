@@ -11,6 +11,8 @@
       <tr><td id="td11" class="cell"></td><td id="td12" class="cell"></td><td id="td13" class="cell"></td><td id="td14" class="cell"></td></tr>
     </table>
     <br>
+    <button id="btn">test</button>
+
     <form id="form" action="">
       <input id="input" autocomplete="off" /><button>Send</button>
     </form>
@@ -27,6 +29,18 @@
       var form = document.getElementById('form');
       var input = document.getElementById('input');
     
+      const btn = document.querySelector('#btn');
+      btn.addEventListener('click', function(e) {
+        // code to execute when the button is clicked
+        e.preventDefault();
+        const coord = {
+          x: '1',
+          y: '2',
+          email: 'john@example.com'
+        };
+        socket.emit('401 message', coord);
+      });
+
       form.addEventListener('submit', function(e) {
         e.preventDefault();
         if (input.value) {
@@ -40,6 +54,13 @@
             item.textContent = msg;
             messages.appendChild(item);
             window.scrollTo(0, document.body.scrollHeight);
+      });
+      socket.on('401 message', function(msg) {
+        var item1 = document.createElement('li');
+        item1.textContent = JSON.stringify(msg);
+        messages.appendChild(item1);
+
+        window.scrollTo(0, document.body.scrollHeight);
       });
     </script>
 
