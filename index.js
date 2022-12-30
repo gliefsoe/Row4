@@ -34,14 +34,14 @@ io.on('connection', (socket) => {
       console.log('user disconnected: ' + clientId + ' count: ' + connectionCount);
     });
     socket.on('chat message', (msg) => {
-        console.log('message from: ' + clientId + ' : ' + msg);
+        //console.log('message from: ' + clientId + ' : ' + msg);
         // emit to all connected sockets
         io.emit('chat message', '(' + clientId + ') : ' + msg);
       });
-    socket.on('401 message', (msg) => {
-        console.log('401 message from: ' + clientId + ' : ' + msg);
+    socket.on('401 message', (coord) => {
+        console.log('401 message from: ' + clientId + ' : ' + JSON.stringify(coord));
         // emit to all connected sockets
-        io.emit('401 message', msg);
+        io.emit('401 message', coord);
       });
   });
 

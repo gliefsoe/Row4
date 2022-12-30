@@ -15,7 +15,7 @@
     <button id="btn">test</button>
 
     <form id="form" action="">
-      <input id="input" autocomplete="off" /><button>Send</button>
+      <input id="input" autocomplete="off" /><button type="submit">Send</button>
     </form>
 
     <ul id="messages">
@@ -40,10 +40,10 @@
           var coord = {};
           coord.x = x;
           coord.y = y;
-          coord.email = 'john@example.com';
-          console.log(JSON.stringify(coord));
+          coord.socketid = socket.id;
+          console.log('sending 401: ' + JSON.stringify(coord));
           socket.emit('401 message', coord);
-          this.style.backgroundColor = 'red';
+          //this.style.backgroundColor = 'red';
         });
       }
       const btn = document.querySelector('#btn');
@@ -67,12 +67,11 @@
             messages.appendChild(item);
             window.scrollTo(0, document.body.scrollHeight);
       });
-      socket.on('401 message', function(msg) {
-        var item1 = document.createElement('li');
-        item1.textContent = JSON.stringify(msg);
-        messages.appendChild(item1);
+      socket.on('401 message', function(coord) {
+        console.log('Receive 401 message: ' + JSON.stringify(coord));
 
-        window.scrollTo(0, document.body.scrollHeight);
+        var objTD = document.getElementById('td' + coord.x + coord.y);
+        objTD.style.backgroundColor = 'red';
       });
 
 
