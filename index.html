@@ -9,6 +9,7 @@
   <body>
     <table id="v" border="1">
       <tr><td id="td11" class="cell"></td><td id="td12" class="cell"></td><td id="td13" class="cell"></td><td id="td14" class="cell"></td></tr>
+      <tr><td id="td21" class="cell"></td><td id="td22" class="cell"></td><td id="td23" class="cell"></td><td id="td24" class="cell"></td></tr>
     </table>
     <br>
     <button id="btn">test</button>
@@ -22,13 +23,24 @@
     </ul>
 
     <script src="/socket.io/socket.io.js"></script>
+    <script src="client.js"></script>
     <script>
       var socket = io();
     
       var messages = document.getElementById('messages');
       var form = document.getElementById('form');
       var input = document.getElementById('input');
-    
+
+      var cells = document.getElementsByClassName('cell');
+      for (var i = 0; i < cells.length; i++) {
+        cells[i].addEventListener('click', function() {
+          var x = this.id.charAt(2);
+          var y = this.id.charAt(3);
+          console.log(this.id + ' : where x:', x, 'y:', y);
+          
+          this.style.backgroundColor = 'red';
+        });
+      }
       const btn = document.querySelector('#btn');
       btn.addEventListener('click', function(e) {
         // code to execute when the button is clicked
@@ -62,6 +74,8 @@
 
         window.scrollTo(0, document.body.scrollHeight);
       });
+
+
     </script>
 
   </body>
