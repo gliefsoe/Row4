@@ -36,8 +36,13 @@
         cells[i].addEventListener('click', function() {
           var x = this.id.charAt(2);
           var y = this.id.charAt(3);
-          console.log(this.id + ' : where x:', x, 'y:', y);
-          
+          //console.log(this.id + ' : where x:', x, 'y:', y);
+          var coord = {};
+          coord.x = x;
+          coord.y = y;
+          coord.email = 'john@example.com';
+          console.log(JSON.stringify(coord));
+          socket.emit('401 message', coord);
           this.style.backgroundColor = 'red';
         });
       }
@@ -45,12 +50,7 @@
       btn.addEventListener('click', function(e) {
         // code to execute when the button is clicked
         e.preventDefault();
-        const coord = {
-          x: '1',
-          y: '2',
-          email: 'john@example.com'
-        };
-        socket.emit('401 message', coord);
+
       });
 
       form.addEventListener('submit', function(e) {
